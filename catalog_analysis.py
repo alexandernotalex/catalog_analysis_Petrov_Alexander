@@ -100,6 +100,15 @@ def count_by_genre(movies):
     return movies_by_genre
 
 
+def actor_filmography(movies):
+    movies_by_actor = {}
+    for movie in movies:
+        actors = movie.get("actors")
+        for actor in actors:
+            movies_by_actor[actor] = movies_by_actor.get(actor, [])
+            movies_by_actor[actor].append(movie["title"])
+    return movies_by_actor
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -135,6 +144,7 @@ def main():
     print(titles_sorted_by_rating(movies))
     print(top_n_by_rating(movies, 6))
     print(count_by_genre(movies))
+    print(actor_filmography(movies))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
