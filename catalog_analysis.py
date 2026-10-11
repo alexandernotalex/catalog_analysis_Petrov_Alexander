@@ -109,6 +109,14 @@ def actor_filmography(movies):
             movies_by_actor[actor].append(movie["title"])
     return movies_by_actor
 
+
+def all_genres(movies):
+    unique_genres = set()
+    for movie in movies:
+        unique_genres.update(movie["genres"])
+    return unique_genres
+
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -145,6 +153,7 @@ def main():
     print(top_n_by_rating(movies, 6))
     print(count_by_genre(movies))
     print(actor_filmography(movies))
+    print(all_genres(movies))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
@@ -160,6 +169,9 @@ def main():
         idx += 1
     else:
         print("Шедевров не найдено")
+
+    top_filmes = {movie["title"]: movie["rating"] for movie in movies if movie["rating"] > average_rating(movies)}
+    print(top_filmes)
     
 
 
