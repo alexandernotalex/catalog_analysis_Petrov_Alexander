@@ -130,6 +130,21 @@ def iter_high_rated(movies, min_rating=8.0):
         if movie["rating"] >= min_rating:
             yield movie
 
+
+def build_report(movies):
+    print("ОТЧЕТ ПО КАТАЛОГУ")
+    print(f"Средний рейтинг: {average_rating(movies)}")
+    print(f"Средний возраст фильмов: {catalog_age_stats(movies)[2]}")
+    print("Топ 3 фильма:")
+    title_to_movie = {m["title"]: m for m in movies}
+    for title, _ in top_n_by_rating(movies, 3):
+        print(format_report_line(title_to_movie[title]))
+    print("Фильмов по жанрам:")
+    for genre, count in count_by_genre(movies).items():
+        print(f"  {genre} — {count}")
+    print(f"Все жанры каталога:{", ".join(all_genres(movies))}")
+
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -169,6 +184,9 @@ def main():
     print(all_genres(movies))
     print(common_actors(movies[1], movies[4]))
     print(genres_only_in_one(movies[5:6], movies[:5]))
+    print("-"*30)
+    build_report(movies)
+    print("-"*30)
     for movie in iter_high_rated(movies):
         print(format_report_line(movie))
     total_duration = sum(m["duration_min"] for m in movies if m["rating"] > 7)
