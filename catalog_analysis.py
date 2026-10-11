@@ -70,6 +70,14 @@ def make_slug(title):
     return "-".join(slug)
 
 
+def format_report_line(movie):
+    genres_str = ", ".join(movie["genres"])
+    info = movie["title"]
+    info += f" ({movie["year"]}) - {movie["rating"]}/10, {duration_in_hours(movie["duration_min"])}, жанры: {genres_str}"
+    return info
+    # выше работает и просто написать {movie["genres"]}, но я побоялся снятия баллов за фигурные скобки
+
+
 
 def main():
     movies = [
@@ -102,6 +110,7 @@ def main():
     print(count_long_movies(movies, 130))
     print(normalize_title(movies[2]["title"]))
     print(make_slug(movies[0]["title"]))
+    print(format_report_line(movies[0]))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
