@@ -33,6 +33,17 @@ def rating_tier(rating: int) -> str:
         return "хорошо"
     return "хорошо" if rating >= 5 else "слабо"
 
+
+def decade_label(year: int) -> str:
+    match year:
+        case year if year > 2020:
+            return "новые"
+        case year if 2015 <= year <= 2020:
+            return "недавние"
+        case year if year < 2015:
+            return "старые"
+
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -60,6 +71,7 @@ def main():
     print(catalog_age_stats(movies))
     print(duration_in_hours(movies[0]["duration_min"]))
     print(rating_tier(movies[6]["rating"]), rating_tier(movies[3]["rating"]))
+    print(decade_label(movies[0]["year"]), decade_label(movies[5]["year"]))
 
 
 if __name__ == "__main__":
