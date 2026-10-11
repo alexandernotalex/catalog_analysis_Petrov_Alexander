@@ -117,6 +117,10 @@ def all_genres(movies):
     return unique_genres
 
 
+def common_actors(movie1, movie2):
+    return set(movie1["actors"]) & set(movie2["actors"])
+
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -154,6 +158,7 @@ def main():
     print(count_by_genre(movies))
     print(actor_filmography(movies))
     print(all_genres(movies))
+    print(common_actors(movies[1], movies[4]))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
