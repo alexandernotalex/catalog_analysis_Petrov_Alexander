@@ -75,8 +75,14 @@ def format_report_line(movie):
     info = movie["title"]
     info += f" ({movie["year"]}) - {movie["rating"]}/10, {duration_in_hours(movie["duration_min"])}, жанры: {genres_str}"
     return info
-    # выше работает и просто написать {movie["genres"]}, но я побоялся снятия баллов за фигурные скобки
+    # выше работает и просто написать {sorted(movie["genres"])}, но я побоялся снятия баллов за фигурные скобки
+    # и сделал через genres_str
 
+
+def titles_sorted_by_rating(movies):
+    sorted_movies = sorted(movies, key=lambda x: x["rating"], reverse=True)
+    movie_rating = [(sorted_movies[i]["title"], sorted_movies[i]["rating"]) for i in range(len(movies))]
+    return movie_rating
 
 
 def main():
@@ -111,6 +117,7 @@ def main():
     print(normalize_title(movies[2]["title"]))
     print(make_slug(movies[0]["title"]))
     print(format_report_line(movies[0]))
+    print(titles_sorted_by_rating(movies))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
