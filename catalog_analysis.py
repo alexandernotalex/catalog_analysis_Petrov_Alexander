@@ -81,8 +81,14 @@ def format_report_line(movie):
 
 def titles_sorted_by_rating(movies):
     sorted_movies = sorted(movies, key=lambda x: x["rating"], reverse=True)
-    movie_rating = [(sorted_movies[i]["title"], sorted_movies[i]["rating"]) for i in range(len(movies))]
+    movie_rating = [sorted_movies[i]["title"] for i in range(len(movies))]
     return movie_rating
+
+
+def top_n_by_rating(movies, n=3):
+    sorted_movies = sorted(movies, key=lambda x: x["rating"], reverse=True)
+    top_n_films = [(sorted_movies[i]["title"], sorted_movies[i]["rating"]) for i in range(n)]
+    return top_n_films
 
 
 def main():
@@ -118,6 +124,7 @@ def main():
     print(make_slug(movies[0]["title"]))
     print(format_report_line(movies[0]))
     print(titles_sorted_by_rating(movies))
+    print(top_n_by_rating(movies, 6))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
