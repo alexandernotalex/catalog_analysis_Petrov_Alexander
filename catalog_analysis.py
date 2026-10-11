@@ -44,6 +44,14 @@ def decade_label(year: int) -> str:
             return "старые"
 
 
+
+def count_long_movies(movies, threshold=120):
+    counter = 0
+    for i in range(len(movies)):
+        if movies[i]["duration_min"] > threshold:
+            counter += 1
+    return counter
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -72,6 +80,24 @@ def main():
     print(duration_in_hours(movies[0]["duration_min"]))
     print(rating_tier(movies[6]["rating"]), rating_tier(movies[3]["rating"]))
     print(decade_label(movies[0]["year"]), decade_label(movies[5]["year"]))
+    print(count_long_movies(movies, 130))
+
+    for i in range(len(movies)):
+        if "comedy" in movies[i]["genres"]:
+            continue
+        else:
+            print(movies[i]["title"])
+
+    idx = 0
+    while idx < len(movies):
+        if movies[idx]["rating"] > 9:
+            print(movies[idx]["title"])
+            break
+        idx += 1
+    else:
+        print("Шедевров не найдено")
+    
+
 
 
 if __name__ == "__main__":
