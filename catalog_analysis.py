@@ -25,6 +25,14 @@ def duration_in_hours(minutes: int) -> str:
     remain_minutes = minutes % 60
     return f"{hours}ч {remain_minutes}м"
 
+
+def rating_tier(rating: int) -> str:
+    if rating >= 9:
+        return "шедевр"
+    elif rating >= 7:
+        return "хорошо"
+    return "хорошо" if rating >= 5 else "слабо"
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -51,6 +59,7 @@ def main():
     print(average_rating(movies))
     print(catalog_age_stats(movies))
     print(duration_in_hours(movies[0]["duration_min"]))
+    print(rating_tier(movies[6]["rating"]), rating_tier(movies[3]["rating"]))
 
 
 if __name__ == "__main__":
