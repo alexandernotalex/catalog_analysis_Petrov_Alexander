@@ -52,6 +52,25 @@ def count_long_movies(movies, threshold=120):
             counter += 1
     return counter
 
+
+def normalize_title(title):
+    words = title.split()
+    normalized_title = ""
+    for word in words:
+        normalized_title += word[0].upper() + word[1:] + " "
+    normalized_title = normalized_title[:-1]
+    return normalized_title
+
+
+def make_slug(title):
+    words = title.split()
+    slug = []
+    for word in words:
+        slug.append(word.lower())
+    return "-".join(slug)
+
+
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -81,6 +100,8 @@ def main():
     print(rating_tier(movies[6]["rating"]), rating_tier(movies[3]["rating"]))
     print(decade_label(movies[0]["year"]), decade_label(movies[5]["year"]))
     print(count_long_movies(movies, 130))
+    print(normalize_title(movies[2]["title"]))
+    print(make_slug(movies[0]["title"]))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
