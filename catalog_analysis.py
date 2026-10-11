@@ -91,6 +91,15 @@ def top_n_by_rating(movies, n=3):
     return top_n_films
 
 
+def count_by_genre(movies):
+    movies_by_genre = {}
+    for movie in movies:
+        genres = movie.get("genres")
+        for genre in genres:
+            movies_by_genre[genre] = movies_by_genre.get(genre, 0) + 1
+    return movies_by_genre
+
+
 def main():
     movies = [
         {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
@@ -125,6 +134,7 @@ def main():
     print(format_report_line(movies[0]))
     print(titles_sorted_by_rating(movies))
     print(top_n_by_rating(movies, 6))
+    print(count_by_genre(movies))
 
     for i in range(len(movies)):
         if "comedy" in movies[i]["genres"]:
